@@ -9,7 +9,11 @@ function Director() {
   const obtenerDirectores = async () => {
     try {
       const response = await api.get("/directores");
-      setDirectores(response.data);
+
+      console.log("DIRECTORES DESDE API:", response.data); // 🔥 para verificar
+
+      // 👇 esto evita errores si viene null o algo raro
+      setDirectores(response.data || []);
     } catch (error) {
       console.error("Error al obtener directores:", error);
     }
@@ -75,34 +79,39 @@ function Director() {
         </button>
       </form>
 
-      <ul className="list-group">
-        {directores.map((d) => (
-          <li
-            key={d.id}
-            className="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div>
-              <strong>{d.nombres}</strong> - {d.estado}
-            </div>
+      {/* 🔥 MENSAJE SI NO HAY DATOS */}
+      {directores.length === 0 ? (
+        <p className="text-danger">No hay directores registrados</p>
+      ) : (
+        <ul className="list-group">
+          {directores.map((d) => (
+            <li
+              key={d.id}
+              className="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div>
+                <strong>{d.nombres}</strong> - {d.estado}
+              </div>
 
-            <div>
-              <button
-                className="btn btn-warning btn-sm me-2"
-                onClick={() => seleccionarDirector(d)}
-              >
-                Editar
-              </button>
+              <div>
+                <button
+                  className="btn btn-warning btn-sm me-2"
+                  onClick={() => seleccionarDirector(d)}
+                >
+                  Editar
+                </button>
 
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={() => eliminarDirector(d.id)}
-              >
-                Eliminar
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => eliminarDirector(d.id)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
