@@ -9,37 +9,45 @@ function App() {
   return (
     <BrowserRouter>
       <div className="container mt-4">
-        <h1 className="mb-4">Proyecto Películas</h1>
 
-        <nav className="mb-4">
-          <Link to="/" className="btn btn-dark me-2">
+        <div className="text-center mb-4">
+          <h1 className="fw-bold text-primary mt-2">
+            🎬 Proyecto Películas
+          </h1>
+        </div>
+
+        <nav className="d-flex justify-content-center mb-4 flex-wrap gap-2">
+          <Link to="/" className="btn btn-outline-primary">
             Género
           </Link>
 
-          <Link to="/directores" className="btn btn-dark me-2">
+          <Link to="/directores" className="btn btn-outline-primary">
             Director
           </Link>
 
-          <Link to="/productoras" className="btn btn-dark me-2">
+          <Link to="/productoras" className="btn btn-outline-primary">
             Productora
           </Link>
 
-          <Link to="/tipos" className="btn btn-dark me-2">
+          <Link to="/tipos" className="btn btn-outline-primary">
             Tipo
           </Link>
 
-          <Link to="/media" className="btn btn-dark">
+          <Link to="/media" className="btn btn-outline-primary">
             Media
           </Link>
         </nav>
 
-        <Routes>
-          <Route path="/" element={<Genero />} />
-          <Route path="/directores" element={<Director />} />
-          <Route path="/productoras" element={<Productora />} />
-          <Route path="/tipos" element={<Tipo />} />
-          <Route path="/media" element={<Media />} />
-        </Routes>
+        <div className="card shadow p-3">
+          <Routes>
+            <Route path="/" element={<Genero />} />
+            <Route path="/directores" element={<Director />} />
+            <Route path="/productoras" element={<Productora />} />
+            <Route path="/tipos" element={<Tipo />} />
+            <Route path="/media" element={<Media />} />
+          </Routes>
+        </div>
+
       </div>
     </BrowserRouter>
   );
